@@ -87,7 +87,7 @@
           </h6>
           <p class="card-text"><%= review.comment %></p> 
         </div>
-           <form action="/listing/<%= listing._id %>/reviews/<%= review._id%>?_method=DELETE" method="POST">
+           <form action="/listings/<%= listing._id %>/reviews/<%= review._id%>?_method=DELETE" method="POST">
             <button class="btn btn-sm btn-dark mt-3 mb-1">Delete</button>
           </form>
       </div>
