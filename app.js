@@ -35,7 +35,7 @@ main()
     })
 
 app.use("/listings", listings)
-app.use("/listings/:id", reviews)
+app.use("/listings", reviews)
 
 app.get("/", (req, res) => {
     res.redirect("/listings");
