@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const Listing = require("../models/listing.js");
 const Review = require("../models/review.js");
 const wrapAsync = require('../utils/wrapasync.js')
 const ExpressError = require('../utils/ExpressError.js')
-const {listingSchema , reviewSchema} = require('../schema.js')
+const {reviewSchema} = require('../schema.js')
 
 const validateReview = ( req, res, next) => {
     let { error } = reviewSchema.validate(req.body);
@@ -17,10 +18,11 @@ const validateReview = ( req, res, next) => {
 };
 
 //Review Create Route
-router.post('/reviews',validateReview, wrapAsync(async(req,res) => {
+router.post('/:id/reviews',validateReview, wrapAsync(async(req,res) => {
     let listing = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review)
-
+    
+    console.log(listing);
     listing.reviews.push(newReview);
     
     await newReview.save();
@@ -41,4 +43,4 @@ router.delete('/reviews/:reviewId' , wrapAsync( async(req,res) => {
 })
 );
 
-module.exports = router();
+module.exports = router;

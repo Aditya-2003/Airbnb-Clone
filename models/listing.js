@@ -11,10 +11,10 @@ const listingSchema = new Schema({
    image: {
       filename: { type: String, default: "noimage" },
       url: {
-         type: String,
-         default: "https://www.waytonikah.com/assets/mainassets/desktop/images/noimage-blog.jpg",
-         set : (v) => (v === "") ? "https://www.waytonikah.com/assets/mainassets/desktop/images/noimage-blog.jpg" : v,
-      },
+             type: String,
+             default: "https://www.waytonikah.com/assets/mainassets/desktop/images/noimage-blog.jpg",
+             set: (v) => (v === "") ? "https://www.waytonikah.com/assets/mainassets/desktop/images/noimage-blog.jpg" : v,
+      }
    },
    description: String,
    price: Number,

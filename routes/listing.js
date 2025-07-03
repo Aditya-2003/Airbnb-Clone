@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Listing = require("../models/listings.js");
+const Listing = require("../models/listing.js");
 const wrapAsync = require('../utils/wrapasync.js')
 const ExpressError = require('../utils/ExpressError.js')
-const {listingSchema , reviewSchema} = require('../schema.js')
+const {listingSchema} = require('../schema.js')
 
 const validateListing = ( req, res, next) => {
     let { error } = listingSchema.validate(req.body);
@@ -43,6 +43,7 @@ router.post(
     "/",
     validateListing,
     wrapAsync(async (req, res, next) => {
+        
         if(!req.body.listing){
             throw new ExpressError(400, "Send valid data for Listing");
         }
@@ -68,6 +69,7 @@ router.put(
         if(!req.body.listing){
             throw new ExpressError(400, "Send valid data for Listing");
         }
+        // console.log("Put Route:-", req.body.listing.image);
         let { id } = req.params;
         await Listing.findByIdAndUpdate(id, { ...req.body.listing })
         res.redirect('/listings')

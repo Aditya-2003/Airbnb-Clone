@@ -4,8 +4,8 @@
     <div class="col-8 offset-2">
       <h3 style="margin: 1rem; text-align: center">Edit this Listing</h3>
       <form
-        action="/listings/<%=listing._id%>?_method=put"
-        method="post"
+        action="/listings/<%=listing._id%>?_method=PUT"
+        method="POST"
         novalidate
         class="needs-validation"
       >
@@ -37,10 +37,11 @@
           <div class="invalid-feedback">Please enter a short Description</div>
         </div>
         <div class="mb-3">
-          <label for="image.url" class="form-label"><b>Image Link</b> </label>
+          <label for="image-url" class="form-label"><b>Image Link</b> </label>
           <input
             type="text"
-            name="listing[image.url]"
+            id="image-url"
+            name="listing[image][url]"
             value="<%=listing.image.url%>"
             class="form-control"
             required

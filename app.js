@@ -2,7 +2,7 @@ const express = require('express');
 const router = express
 const mongoose = require('mongoose');
 const app = express();
-const Listing = require("./models/listings.js");
+const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate')
@@ -41,16 +41,6 @@ app.get("/", (req, res) => {
     res.redirect("/listings");
 });
 
-const validateListing = ( req, res, next) => {
-    let { error } = listingSchema.validate(req.body);
-    if(error){
-        let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    }
-    else{
-        next();
-    }
-};
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
