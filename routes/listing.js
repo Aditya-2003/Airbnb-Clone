@@ -4,18 +4,9 @@ const Listing = require("../models/listing.js");
 const wrapAsync = require('../utils/wrapasync.js')
 const ExpressError = require('../utils/ExpressError.js')
 const {listingSchema} = require('../schema.js')
-const { isLoggedIn } = require('../middleware.js');
+const { isLoggedIn, isOwner, validateListing } = require('../middleware.js');
 
-const validateListing = ( req, res, next) => {
-    let { error } = listingSchema.validate(req.body);
-    if(error){
-        let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    }
-    else{
-        next();
-    }
-};
+
 
 router.get(
     "/",
@@ -83,13 +74,13 @@ router.get(
 router.put(
     '/:id',
     validateListing,
+    isOwner,
     wrapAsync(async (req, res) => {
         if(!req.body.listing){
             throw new ExpressError(400, "Send valid data for Listing");
         }
-
         let { id } = req.params;
-        await Listing.findByIdAndUpdate(id, { ...req.body.listing })
+        await Listing.findByIdAndUpdate(id, { ...req.body.listing });
         req.flash("success", "Listing Updated!");
         res.redirect('/listings')
     })
@@ -98,6 +89,7 @@ router.put(
 router.delete(
     "/:id",
     isLoggedIn,
+    isOwner,
     wrapAsync(async (req, res) => {
         let { id } = req.params;
         await Listing.findByIdAndDelete(id);
