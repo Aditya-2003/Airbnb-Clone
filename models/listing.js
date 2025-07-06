@@ -11,28 +11,31 @@ const listingSchema = new Schema({
    image: {
       filename: { type: String, default: "noimage" },
       url: {
-             type: String,
-             default: "https://www.waytonikah.com/assets/mainassets/desktop/images/noimage-blog.jpg",
-             set: (v) => (v === "") ? "https://www.waytonikah.com/assets/mainassets/desktop/images/noimage-blog.jpg" : v,
+         type: String,
+         default: "https://www.waytonikah.com/assets/mainassets/desktop/images/noimage-blog.jpg",
+         set: (v) => (v === "") ? "https://www.waytonikah.com/assets/mainassets/desktop/images/noimage-blog.jpg" : v,
       }
    },
    description: String,
    price: Number,
    location: String,
    country: String,
-   reviews:[{
+   reviews: [{
       type: Schema.Types.ObjectId,
       ref: "Review"
    },
-],
+   ],
+   owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+   }
 });
 
-listingSchema.post("findOneAndDelete", async(listing) => {
-   if(listing){
-      await Review.deleteMany({_id : { $in: listing.reviews } })
+listingSchema.post("findOneAndDelete", async (listing) => {
+   if (listing) {
+      await Review.deleteMany({ _id: { $in: listing.reviews } })
    }
 })
 
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;
- 

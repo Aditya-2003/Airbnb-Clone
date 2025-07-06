@@ -20,6 +20,7 @@ const validateListing = ( req, res, next) => {
 router.get(
     "/",
     wrapAsync(async (req, res) => {
+       
         let allListings = await Listing.find({});
         res.render("listings/index.ejs", { allListings });
     })
@@ -34,12 +35,16 @@ router.get(
     "/:id",
     wrapAsync(async (req, res) => {
         let { id } = req.params;
-        const listing = await Listing.findById(id).populate("reviews");
+        const listing = await Listing.findById(id)
+        .populate("reviews")
+        .populate("owner");
+        const currentUser = req.user; // Get the current user from the request
         if(!listing){
             req.flash("error", "Listing not found!");
             res.redirect("/listings");
         }
-        res.render("listings/show.ejs", { listing });
+        res.render("listings/show.ejs", { listing ,currentUser });
+//        res.render("listings/show.ejs", { listing, currentUser });
     })
 );
 
@@ -47,13 +52,14 @@ router.get(
 router.post(
     "/",
     isLoggedIn,
-    validateListing,
+    validateListing, 
     wrapAsync(async (req, res, next) => {
         
         if(!req.body.listing){
             throw new ExpressError(400, "Send valid data for Listing");
         }
         let newlisting = new Listing(req.body.listing);
+        newlisting.owner = req.user._id; // Set the owner to the current user
         await newlisting.save();
         req.flash("success", "Added new listing!");
         res.redirect("/listings")
