@@ -11,7 +11,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user.js');
 
-
 const MONGO_URL = "mongodb://127.0.0.1:27017/AirBnB";
 
 const userRouter = require('./routes/user.js');
@@ -62,15 +61,6 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user; // Make currentUser available in all templates
     next();
 })
-
-// app.get("/demouser", async (req, res) => {
-//     let fakeUser = new User({
-//         email : "student2gmail.com",
-//         username: "adi-Learns",
-//     })
-//     let registeredUser = await User.register(fakeUser, "helloworld");
-//     res.send(registeredUser);
-// });
 
 app.use("/listings", listingRouter)
 app.use("/listings/:id/reviews", reviewRouter)
