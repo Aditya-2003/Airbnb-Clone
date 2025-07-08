@@ -25,7 +25,11 @@ module.exports.showListing = async (req, res) => {
         req.flash("error", "Listing not found!");
         return res.redirect("/listings");
     }
-    res.render("listings/show.ejs", { listing, currentUser });
+    res.render("listings/show.ejs", { 
+        listing, 
+        currentUser, 
+        maptilerKey: process.env.MAPTILER_API_KEY 
+    }); // Pass the MapTiler API key to the template
 }
 
 module.exports.createListing = async (req, res, next) => {
@@ -34,9 +38,6 @@ module.exports.createListing = async (req, res, next) => {
     }
     let url = req.file.path; 
     let filename = req.file.filename;
-
-    console.log(req.body);
-    console.log(req.file);
     
     let newlisting = new Listing(req.body.listing);
     newlisting.owner = req.user._id; // Set the owner to the current user

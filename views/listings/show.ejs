@@ -40,6 +40,7 @@
   <div class="col-8 offset-2 mt-4 mb-4">
     
     <%if(currentUser) {%>
+      <hr class="mt-4 mb-4">
     <h4>Leave a Review</h4>
     <form
       class="mb-3 needs-validation"
@@ -82,6 +83,7 @@
     <!-- DISPLAY REVIEWS -->
      
     <% if(listing.reviews.length !== 0){ %>
+      <hr class="mt-4 mb-4">
     <h4 class="mb-4">All Reviews</h4>
     <% } %>
     <div class="row g-4">
@@ -135,4 +137,14 @@
       <% } %>
     </div>
   </div>
+  <div id="map" class="col-8 offset-2">
+    <div id="map">
+      <a href="https://www.maptiler.com" style="position:absolute;left:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
+    </div>
+    <p><a href="https://www.maptiler.com/copyright/" target="_blank" rel="noopener">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">&copy; OpenStreetMap contributors</a></p>
+  </div>
+  <script>
+    const MAPTILER_API_KEY = "<%= maptilerKey %>";
+    const Location = "<%= listing.location %>"
+  </script>
 </body>
