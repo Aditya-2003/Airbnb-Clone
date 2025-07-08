@@ -11,6 +11,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user.js');
 
+if(process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}    
+
 const MONGO_URL = "mongodb://127.0.0.1:27017/AirBnB";
 
 const userRouter = require('./routes/user.js');
