@@ -1,6 +1,6 @@
 <% layout("/layouts/boilerplate") -%>
 <body>
-  <div class="row mt-3">
+  <div class="row mt-3 p-3 ">
     <div class="col-8 offset-2">
       <h3><%=listing.title%></h3>
     </div>
@@ -88,8 +88,8 @@
     <% } %>
     <div class="row g-4">
       <% for (let review of listing.reviews) { %>
-      <div class="card shadow-sm col-5 ms-3 mb-1 p-3">
-        <div class="card-body">
+      <div class="card review-card col-5 ms-3 mb-1 p-3">
+        <div class="card-body ">
           <h5 class="card-title"><%=review.author.username%></h5>
           <h6 class="card-subtitle mb-2 text-muted">
             <% for (let i = 1; i <= 5; i++) { %> <% if (i <= review.rating) { %>
@@ -137,12 +137,17 @@
       <% } %>
     </div>
   </div>
-  <div id="map" class="col-8 offset-2">
+  
+  <div id="map-container" class="col-8 offset-2">
+    <hr>
+    <b>Where will you be in</b>
+    <p style="font-size: 1.8rem; font-weight: 500;">
+      <%=listing.location%>
+    </p>
     <div id="map">
       <a href="https://www.maptiler.com" style="position:absolute;left:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
     </div>
-    <p><a href="https://www.maptiler.com/copyright/" target="_blank" rel="noopener">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">&copy; OpenStreetMap contributors</a></p>
-  </div>
+ </div>
   <script>
     const MAPTILER_API_KEY = "<%= maptilerKey %>";
     const Location = "<%= listing.location %>"

@@ -1,8 +1,8 @@
 <% layout('/layouts/boilerplate') -%>
 <body>
-  <div class="row">
+  <div class="row m-3">
     <div class="col-8 offset-2">
-      <h3 style="margin: 1rem; text-align: center">Edit this Listing</h3>
+      <h2 style="margin: 1rem; text-align: center; font-weight: 900;">Edit this Listing</h2>
       <form
         action="/listings/<%=listing._id%>?_method=PUT"
         method="POST"
@@ -39,7 +39,7 @@
         </div>
         <div class="mb-3">
           <label for="image-url" class="form-label"><b>Original Image</b> </label><br>
-          <img src="<%=originalImageUrl%>" alt="" style="width: 25%" />
+          <img src="<%=originalImageUrl%>" alt="" style="width: 25%; border-radius: 0.5rem;" />
         </div>
         <div class="mb-3">
           <label for="image-url" class="form-label"><b>Upload New Image</b> </label>
