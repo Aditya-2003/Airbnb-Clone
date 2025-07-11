@@ -132,6 +132,8 @@ transition: all 0.3s ease-in-out !important;
 /* Show Page */
 .show-img {
   height: 30vh;
+  box-shadow: 0 10px 25px 0 rgba(199, 109, 75, 0.18), 0 1.5px 4px 0 rgba(59, 59, 59, 0.10);
+
 }
 .btns {
   display: flex;
@@ -177,8 +179,105 @@ transition: all 0.3s ease-in-out !important;
 }
 /* Review Card */
 .review-card {
- box-shadow: 0 4px 16px 0 rgba(199, 109, 75, 0.15), 0 1.5px 4px 0 rgba(59, 59, 59, 0.08);
-  border-radius: 5rem;
+ box-shadow: 0 4px 16px 0 rgba(199, 109, 75, 0.18), 0 1.5px 4px 0 rgba(59, 59, 59, 0.10);
+ border-color: #fff7d8 !important; 
+ border-radius: 5rem;
   background-color: #fff7d8;
   padding: 1rem;
+}
+
+.listing-card {
+  width: 100% !important;
+  max-width: 25rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  background-color: #F5F0E6;
+  /* box-shadow: 0 4px 16px 0 rgba(199, 109, 75, 0.12), 0 1.5px 4px 0 rgba(59, 59, 59, 0.08); */
+  transition: transform 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.listing-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 16rem;
+  object-fit: cover;
+  border-radius: 1rem 1rem 0 0;
+}
+
+@media (max-width: 992px) {
+  .listing-card {
+    max-width: 100%;
+  }
+  .card-img-top {
+    height: 12rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .listing-card {
+    max-width: 100%;
+  }
+  .card-img-top {
+    height: 10rem;
+  }
+}
+
+.show-listing-card {
+  width: 100%;
+  max-width: 40rem;
+  margin-bottom: 0rem;
+  background-color: #fff7d8 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.6rem 2rem;
+}
+
+.show-listing-card .card-img-top {
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+  /* border-radius: 1.5rem 1.5rem 0 0; */
+}
+
+.show-card{
+  padding: 0.5rem 0 !important;
+  font-weight: 600 !important;
+}
+@media (max-width: 992px) {
+  .show-listing-card {
+    max-width: 100%;
+  }
+  .show-listing-card .card-img-top {
+    height: 22vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .show-listing-card {
+    max-width: 100%;
+  }
+  .show-listing-card .card-img-top {
+    height: 16vh;
+  }
+}
+
+.font-change {
+  font-family:  'Arial Narrow', Arial, sans-serif !important;
+  font-weight: 700 !important;
+  color: #2c2517 !important;
+}
+.form-container{
+  border-radius: 2rem;
+  margin: 2rem auto !important;
+  width: 50vw !important;
+  padding: 2rem 0 !important;
+  background-color: #fff7d8 !important;
+  box-shadow: 0 16px 24px 0 rgba(199, 109, 75, 0.18), 0 3px 8px 0 rgba(59, 59, 59, 0.12);
 }

@@ -2,20 +2,18 @@
 <body>
   <div class="row mt-3 p-3 ">
     <div class="col-8 offset-2">
-      <h3><%=listing.title%></h3>
+      <h3 class="font-change"><%=listing.title%></h3>
     </div>
-    <div class="card col-6 offset-2 show-card listing-card">
+    <div class="col-6 offset-2 show-listing-card">
       <img
         src="<%= listing.image.url%>"
         class="card-img-top show-img"
         alt="listing-image"
       />
-      <div class="card-body">
+      <div class="card-body show-card">
         <p class="card-text">Owned By <i><%=listing.owner.username%></i></p>
         <p class="card-text"><%=listing.description%></p>
-        <p class="card-text">
-          &#8377;<%=listing.price.toLocaleString("en-in")%>/night
-        </p>
+        <p class="card-text">&#8377;<%=listing.price.toLocaleString("en-in")%>/night</p>
         <p class="card-text"><%=listing.location%></p>
         <p class="card-text"><%=listing.country%></p>
       </div>
