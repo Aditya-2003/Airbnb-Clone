@@ -16,7 +16,6 @@ module.exports.createAccount = async (req, res) => {
                 return next(err);
             }
             req.flash("success", "Welcome to Wanderlust!");
-            console.log(req.originalUrl);
             res.redirect('/listings');
         });
     }

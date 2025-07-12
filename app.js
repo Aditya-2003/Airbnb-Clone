@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate')
 const ExpressError = require('./utils/ExpressError.js')
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
@@ -15,7 +16,7 @@ if(process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }    
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/AirBnB";
+const dbUrl = process.env.ATLASDB_URL;
 
 const userRouter = require('./routes/user.js');
 const listingRouter = require('./routes/listing.js');
@@ -28,8 +29,21 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public/")))
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret : process.env.SESSION_SECRET
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error", () => {
+    console.log("Error in MONGO SESSION STORE",err);
+});
+
 const sessionOptions = {
-    secret: "mysupersecretkey",
+    store: store,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -49,7 +63,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 }
 
 main()

@@ -1,4 +1,5 @@
 const key = MAPTILER_API_KEY; 
+const listingTitle = title;
 const listingLocation = Location;
       const map = L.map('map').setView([49.2125578, 16.62662018], 14); //starting position
       L.tileLayer(`https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=${key}`,{ //style URL
@@ -24,7 +25,7 @@ function getCoordinates() {
 
         // Add a marker
         L.marker([lat, lng]).addTo(map)
-          .bindPopup(listingLocation)
+          .bindPopup(listingTitle)
           .openPopup();
       } else {
         alert("Location not found.");
